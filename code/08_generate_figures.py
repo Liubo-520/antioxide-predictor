@@ -38,6 +38,8 @@ plt.rcParams.update({
     'figure.dpi':        300,
     'savefig.dpi':       300,
     'savefig.bbox':      'tight',
+    'pdf.fonttype':      42,
+    'svg.fonttype':      'none',
     'axes.spines.top':   False,
     'axes.spines.right': False,
     'axes.linewidth':    1.0,
@@ -220,7 +222,7 @@ def fig_williams(williams_data):
     scatter_kw = dict(s=32, linewidths=0.4, edgecolor='white', alpha=0.85)
     if mask_in.sum():
         ax.scatter(h[mask_in],   e_std[mask_in],   color='#1565C0',
-                   label=f'In AD (n={mask_in.sum()})', **scatter_kw)
+                   label=f"In AD (n={mask_in.sum()}, {ad['in_AD_pct']:.1f}%)", **scatter_kw)
     if mask_hilo.sum():
         ax.scatter(h[mask_hilo], e_std[mask_hilo], color='#FF8F00',
                    label=f'High leverage (n={mask_hilo.sum()})', **scatter_kw)
@@ -232,9 +234,9 @@ def fig_williams(williams_data):
                    label=f'Outlier (n={mask_out.sum()})', **scatter_kw)
 
     ax.axvline(h_star, color='k', linestyle='--', linewidth=1.8,
-               label=f'h* = {h_star:.3f}')
+               label=f'h* = {h_star:.4f}')
     ax.axhline( 3.0, color='#9E9E9E', linestyle=':', linewidth=1.5,
-               label='$\\pm$3$\\sigma$')
+               label='Residual limits: $\\pm$3')
     ax.axhline(-3.0, color='#9E9E9E', linestyle=':', linewidth=1.5)
     ax.axhline( 0.0, color='k', linestyle='-', linewidth=0.6, alpha=0.4)
 
@@ -242,25 +244,22 @@ def fig_williams(williams_data):
 
     ax.set_xlabel('Leverage ($h$)', fontsize=14)
     ax.set_ylabel('Standardized Residuals', fontsize=14)
-    ax.set_title('Applicability Domain: Williams Plot\n(PCA-reduced Morgan FP, 50 components)',
+    model_label = williams_data.get('model_label', 'Model')
+    ax.set_title(f'{model_label}: Williams Plot\n(PCA-reduced Morgan FP, 50 components)',
                  fontsize=14, fontweight='bold', pad=10)
     # Legend OUTSIDE the plot
-    ax.legend(fontsize=11, loc='center left', bbox_to_anchor=(1.02, 0.5),
+    ax.legend(title=f'Test compounds (n={len(h)})', fontsize=11,
+              loc='center left', bbox_to_anchor=(1.02, 0.5),
               framealpha=0.95)
 
-    in_ad_pct = ad['in_AD_pct']
-    ax.text(0.03, 0.04,
-            f"Compounds in AD: {ad['in_AD']}/{len(h)} ({in_ad_pct:.1f}%)",
-            transform=ax.transAxes, fontsize=12,
-            bbox=dict(boxstyle='round,pad=0.5', facecolor='#FFF8E1',
-                      alpha=0.92, edgecolor='#BDBDBD'))
-
     ax.set_xlim(left=0)
-    ylim = max(4.5, np.percentile(np.abs(e_std), 99) + 0.5)
+    ylim = max(4.5, np.max(np.abs(e_std)) + 0.35)
     ax.set_ylim(-ylim, ylim)
 
     plt.tight_layout()
     plt.savefig(os.path.join(FIG_DIR, 'fig4_williams.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'fig4_williams.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'fig4_williams.svg'))
     plt.close()
     print("  Fig 4 saved")
 

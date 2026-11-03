@@ -35,6 +35,7 @@ STAGES = [
     ("curve",     "revision_work/code/r1_learning_curve.py",  "accuracy against training-set size (GPU)"),
     ("blend",     "revision_work/code/r3_blend_cv.py",       "select the descriptor component out of fold"),
     ("hybrid",    "revision_work/code/r3_final_hybrid.py",    "final hybrid, test set predicted once"),
+    ("hybrid-ad", "code/05_applicability_domain.py",          "refresh the Williams diagnostic for the final hybrid"),
     ("metrics",   "revision_work/code/r3_validation_metrics.py","Golbraikh-Tropsha and Roy statistics"),
     ("harvest",   "revision_work/code/r3_harvest_external.py","assemble the 196-compound set from ChEMBL"),
     ("external",  "revision_work/code/r3_external_predict.py", "predict the independent set"),

@@ -103,3 +103,23 @@ The release at <https://github.com/Liubo-520/antioxide-predictor/releases/tag/v1
 contains the two checkpoint archives and SHA-256 checksums. Publication drafts,
 reviewer correspondence, local environment files and development backups are
 excluded from this repository.
+
+## Williams diagnostic consistency update
+
+`results/williams_plot_data.json` now uses the final reported hybrid predictions
+(tuned AttentiveFP ensemble plus Mordred Extra Trees). PCA is fitted only to the
+1,528 training fingerprints and retains 50 components. Leverage uses the
+Moore-Penrose pseudoinverse of the training PCA score cross-product; the warning
+threshold is `3*(50+1)/1528 = 0.1001`. Residuals are observed minus predicted,
+divided by their sample standard deviation within the evaluated set. The
+383-compound test split has 376 compounds inside the Williams limits, matching
+the hybrid-model statistics in the paper's supplementary Table S2.
+
+The pipeline reruns the diagnostic after fitting the final hybrid. To refresh
+it from the released predictions, run:
+
+    python reproduce.py --stage data --stage hybrid-ad
+
+The `fig_williams` function in `code/08_generate_figures.py` uses
+this JSON to export the figure as PNG, PDF and SVG, with all compounds visible.
+The original checkpoint archives remain unchanged in release v1.0.

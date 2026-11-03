@@ -20,7 +20,7 @@ PCA_N_COMPONENTS = 50  # tight, interpretable AD
 
 
 def compute_leverage(X_train, X_query):
-    """h_i = x_i^T (X^T X)^{-1} x_i for each query point."""
+    """Leverage in training-fitted PCA score space, using a pseudoinverse."""
     XtX_inv = np.linalg.pinv(X_train.T @ X_train)
     return np.einsum('ij,jk,ik->i', X_query, XtX_inv, X_query)
 
@@ -29,8 +29,8 @@ def williams_plot_data(train_X, test_X, preds, targets):
     n, p = train_X.shape
     h = compute_leverage(train_X, test_X)
     h_star = 3.0 * (p + 1) / n
-    residuals = preds - targets
-    s = np.sqrt(np.sum(residuals**2) / max(len(residuals) - 1, 1))
+    residuals = targets - preds
+    s = residuals.std(ddof=1)
     e_std = residuals / s if s > 0 else residuals
     return h, e_std, h_star, s
 
@@ -57,21 +57,20 @@ def tanimoto_ad(train_fps, test_fps):
     """
     Fingerprint-similarity AD (cross-check).
     Threshold = mean(D_train) - 3*std(D_train), where D_train_i = mean Tanimoto
-    of compound i to all other training compounds.  Test compound is in AD if
+    of compound i to the full training set, including itself. Test compound is in AD if
     its mean Tanimoto similarity to the training set exceeds this threshold.
     """
     def tanimoto_matrix(A, B):
-        A = A.astype(np.float32)
-        B = B.astype(np.float32)
+        A = A.astype(np.float64)
+        B = B.astype(np.float64)
         inter = A @ B.T
         a = A.sum(axis=1, keepdims=True)
         b = B.sum(axis=1, keepdims=True)
         return inter / (a + b.T - inter + 1e-12)
 
     sim_train = tanimoto_matrix(train_fps, train_fps)
-    np.fill_diagonal(sim_train, 0.0)
-    train_mean_sim = sim_train.sum(axis=1) / (sim_train.shape[1] - 1)
-    threshold = train_mean_sim.mean() - 3 * train_mean_sim.std()
+    train_mean_sim = sim_train.mean(axis=1)
+    threshold = train_mean_sim.mean() - 3 * train_mean_sim.std(ddof=1)
 
     sim_test = tanimoto_matrix(test_fps, train_fps)
     test_mean_sim = sim_test.mean(axis=1)
@@ -80,7 +79,7 @@ def tanimoto_ad(train_fps, test_fps):
     return {
         'threshold':       float(threshold),
         'train_mean_sim':  float(train_mean_sim.mean()),
-        'train_std_sim':   float(train_mean_sim.std()),
+        'train_std_sim':   float(train_mean_sim.std(ddof=1)),
         'test_mean_sim':   test_mean_sim.tolist(),
         'in_AD':           int(in_ad.sum()),
         'in_AD_pct':       float(100 * in_ad.mean()),
@@ -89,17 +88,30 @@ def tanimoto_ad(train_fps, test_fps):
 
 
 def main():
+    # Keep scientific symbols in progress messages portable on Windows.
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
     with open(os.path.join(RESULT_DIR, "processed_data.pkl"), 'rb') as f:
         data = pickle.load(f)
-    with open(os.path.join(RESULT_DIR, "random_split_results.json")) as f:
-        rand_results = json.load(f)
+    hybrid_path = os.path.join(DATA_DIR, "revision_work", "results", "final_hybrid.json")
+    if os.path.exists(hybrid_path):
+        with open(hybrid_path) as f:
+            hybrid = json.load(f)
+        preds = np.array(hybrid['hybrid']['AttentiveFP tuned + ET-all']['predictions'])
+        targets = data['df']['pIC50'].values[np.array(data['random_split']['test_idx'])]
+        model_label = 'Final hybrid'
+        prediction_source = 'revision_work/results/final_hybrid.json'
+    else:
+        with open(os.path.join(RESULT_DIR, "random_split_results.json")) as f:
+            rand_results = json.load(f)
+        best = next(r for r in rand_results if r['model'] == 'attentivefp')
+        preds = np.array(best['predictions'])
+        targets = np.array(best['targets'])
+        model_label = 'AttentiveFP development model'
+        prediction_source = 'results/random_split_results.json'
 
-    best = next(r for r in rand_results if r['model'] == 'attentivefp')
-    preds   = np.array(best['predictions'])
-    targets = np.array(best['targets'])
-
-    train_fps = data['random_split']['train_fps'].astype(np.float32)
-    test_fps  = data['random_split']['test_fps'].astype(np.float32)
+    train_fps = data['random_split']['train_fps'].astype(np.float64)
+    test_fps  = data['random_split']['test_fps'].astype(np.float64)
     print(f"Train FPs: {train_fps.shape},  Test FPs: {test_fps.shape}")
 
     # ── Williams plot in PCA(50)-reduced space ────────────────────────────────
@@ -146,6 +158,10 @@ def main():
         r2_tani, rmse_tani = None, None
 
     williams_data = {
+        'model_label':   model_label,
+        'prediction_source': prediction_source,
+        'pca_fit_set':   'training set only',
+        'residual_definition': '(observed - predicted) / sample SD of residuals in the evaluated set',
         'method':        f'Williams plot on PCA({PCA_N_COMPONENTS}) of Morgan FP',
         'pca_n_components':     PCA_N_COMPONENTS,
         'pca_var_explained':    explained,
