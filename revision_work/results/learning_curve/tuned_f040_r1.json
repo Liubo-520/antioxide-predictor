@@ -1,0 +1,25 @@
+{
+ "capacity": "tuned",
+ "config": {
+  "hidden": 300,
+  "num_layers": 3,
+  "num_timesteps": 2,
+  "dropout": 0.2,
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "batch_size": 64
+ },
+ "fraction": 0.4,
+ "repeat": 1,
+ "n_train": 550,
+ "n_val": 61,
+ "val_r2": 0.20841122382484545,
+ "best_epoch": 19,
+ "test": {
+  "r2": 0.2453294597548623,
+  "rmse": 0.7686092727112798,
+  "mae": 0.4997356148441529
+ },
+ "n_params": 2635201,
+ "minutes": 0.08360496362050375
+}

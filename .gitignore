@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# regenerated locally, too large to track
+results/processed_data.pkl
+models/*.pt
+revision_work/results/tuned_models/
+revision_work/results/*.joblib
+*.log
+
+# LaTeX build artefacts
+*.aux
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+
+# Generated plotting/table outputs and local credentials
+results/figures/
+revision_work/figures/
+revision_work/tables/
+.env
+.env.*

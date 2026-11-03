@@ -1,0 +1,25 @@
+{
+ "capacity": "compact",
+ "config": {
+  "hidden": 100,
+  "num_layers": 2,
+  "num_timesteps": 2,
+  "dropout": 0.2,
+  "lr": 0.001,
+  "weight_decay": 1e-05,
+  "batch_size": 64
+ },
+ "fraction": 1.0,
+ "repeat": 2,
+ "n_train": 1375,
+ "n_val": 153,
+ "val_r2": 0.48566579066144155,
+ "best_epoch": 52,
+ "test": {
+  "r2": 0.5631766601941621,
+  "rmse": 0.5847629369098645,
+  "mae": 0.4247417741360303
+ },
+ "n_params": 227501,
+ "minutes": 1.8515323917071025
+}

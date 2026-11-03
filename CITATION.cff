@@ -1,0 +1,77 @@
+cff-version: 1.2.0
+message: "If you use this software or the data, please cite the paper below."
+title: "AntioxFP: graph neural networks for DPPH antioxidant activity prediction"
+abstract: >-
+  Code, curated data and trained models for predicting DPPH radical-scavenging
+  activity (pIC50) from molecular structure with graph neural networks, with
+  interpretability analysis, applicability-domain assessment and an independent
+  validation set assembled from the primary literature.
+authors:
+  - family-names: "Wang"
+    given-names: "Shengnan"
+    affiliation: "School of Biological and Chemical Engineering, Panzhihua University"
+  - family-names: "Zhang"
+    given-names: "Qi"
+    affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+  - family-names: "Liu"
+    given-names: "Xucheng"
+    affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+  - family-names: "Wang"
+    given-names: "Zixuan"
+    affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+  - family-names: "Cheng"
+    given-names: "Jiangke"
+    affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+  - family-names: "Huang"
+    given-names: "Zhi"
+    affiliation: "International Research Center for Contaminant Hydrogeology, Chengdu University of Technology"
+    email: "525514353@qq.com"
+license: MIT
+repository-code: "https://github.com/Liubo-520/antioxide-predictor"
+url: "https://huggingface.co/spaces/AI4deeperScience/AntioxFP"
+keywords:
+  - antioxidant
+  - QSAR
+  - graph neural network
+  - DPPH
+  - applicability domain
+preferred-citation:
+  type: article
+  title: >-
+    Graph Neural Network Models for Predicting the Antioxidant Activity of
+    Chemical Compounds: Interpretability Analysis and Applicability Domain
+    Assessment
+  authors:
+    - family-names: "Wang"
+      given-names: "Shengnan"
+      affiliation: "School of Biological and Chemical Engineering, Panzhihua University"
+    - family-names: "Zhang"
+      given-names: "Qi"
+      affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+    - family-names: "Liu"
+      given-names: "Xucheng"
+      affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+    - family-names: "Wang"
+      given-names: "Zixuan"
+      affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+    - family-names: "Cheng"
+      given-names: "Jiangke"
+      affiliation: "School of Mathematics and Computer Science, Panzhihua University"
+    - family-names: "Huang"
+      given-names: "Zhi"
+      affiliation: "International Research Center for Contaminant Hydrogeology, Chengdu University of Technology"
+      email: "525514353@qq.com"
+  journal: "Chemical Engineering Research and Design"
+  year: 2026
+  notes: "Under review (CHERD-D-26-01950); update with volume, pages and DOI on acceptance."
+references:
+  - type: article
+    title: "QSAR Models for Predicting the Antioxidant Potential of Chemical Substances"
+    authors:
+      - family-names: "Ghironi"
+        given-names: "Sofia"
+    journal: "Journal of Xenobiotics"
+    volume: 15
+    year: 2025
+    doi: "10.3390/jox15030080"
+    notes: "Source of the curated dataset and of the 80:20 partition reused here."

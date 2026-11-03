@@ -1,0 +1,325 @@
+{
+ "diagnostics": {
+  "model": "hybrid: AttentiveFP tuned + ET-all",
+  "h_star": 0.10013089005235602,
+  "rmse_all": 0.4161342025492929,
+  "rmse_without_top": 0.3550419129601365,
+  "mean_abs_err": 0.27175461328128797,
+  "top_mean_abs_err": 1.8724762165891171,
+  "exp_pIC50_top": [
+   0.328447662716636,
+   1.52724355068279,
+   0.72519465815406,
+   5.05060999335509,
+   5.94823141718741
+  ],
+  "exp_pIC50_mean_all": 4.063111818913772,
+  "exp_pIC50_sd_all": 0.8859202435072574,
+  "max_sim_top_mean": 0.5701853366650607,
+  "max_sim_all_mean": 0.7362684877755823,
+  "leverage_top_mean": 0.01838174754436392,
+  "leverage_all_mean": 0.02928732268979179,
+  "n_top_above_h_star": 0,
+  "rmse_extreme_5pct_tails": 0.8362817504309751,
+  "rmse_central_90pct": 0.3343700081291461,
+  "corr_abs_err_vs_max_sim": -0.3181498402491375,
+  "corr_abs_err_vs_leverage": -0.16842623105606092
+ },
+ "outliers": [
+  {
+   "rank": 1,
+   "smiles": "NCC(=O)N1CCCC1C(=O)NC(CCC(=O)O)C(=O)O",
+   "chembl_id": "CHEMBL371315",
+   "doi": "10.1039/C6MD00006A",
+   "experimental_pIC50": 0.328447662716636,
+   "predicted_pIC50": 3.0031392571113242,
+   "error": -2.6746915943946883,
+   "single_model_prediction": 2.8967678546905518,
+   "leverage": 0.0176879617917356,
+   "inside_leverage_threshold": true,
+   "max_tanimoto_to_training": 0.3333333333333333,
+   "chemical_class": "Other",
+   "mol_weight": 301.29900000000004,
+   "n_heavy_atoms": 21,
+   "top_importance_atoms": [
+    {
+     "atom_index": 8,
+     "symbol": "C",
+     "aromatic": false,
+     "importance": 1.0
+    },
+    {
+     "atom_index": 17,
+     "symbol": "O",
+     "aromatic": false,
+     "importance": 0.9722256660461426
+    },
+    {
+     "atom_index": 20,
+     "symbol": "O",
+     "aromatic": false,
+     "importance": 0.9693449139595032
+    },
+    {
+     "atom_index": 4,
+     "symbol": "N",
+     "aromatic": false,
+     "importance": 0.955055832862854
+    },
+    {
+     "atom_index": 7,
+     "symbol": "C",
+     "aromatic": false,
+     "importance": 0.8940141201019287
+    }
+   ],
+   "chembl_cross_check": {
+    "n_dpph_ic50_records": 0,
+    "records": []
+   }
+  },
+  {
+   "rank": 2,
+   "smiles": "O=C(O)C=Cc1ccc(O)cc1",
+   "chembl_id": "CHEMBL66879",
+   "doi": "10.1021/acs.jnatprod.7b00085",
+   "experimental_pIC50": 1.52724355068279,
+   "predicted_pIC50": 3.663316902570896,
+   "error": -2.136073351888106,
+   "single_model_prediction": 3.8128507137298584,
+   "leverage": 0.012361883045371117,
+   "inside_leverage_threshold": true,
+   "max_tanimoto_to_training": 0.6071428571428571,
+   "chemical_class": "Phenol",
+   "mol_weight": 164.16,
+   "n_heavy_atoms": 12,
+   "top_importance_atoms": [
+    {
+     "atom_index": 2,
+     "symbol": "O",
+     "aromatic": false,
+     "importance": 1.0
+    },
+    {
+     "atom_index": 9,
+     "symbol": "O",
+     "aromatic": false,
+     "importance": 0.9889344573020935
+    },
+    {
+     "atom_index": 3,
+     "symbol": "C",
+     "aromatic": false,
+     "importance": 0.8679243922233582
+    },
+    {
+     "atom_index": 4,
+     "symbol": "C",
+     "aromatic": false,
+     "importance": 0.8544919490814209
+    },
+    {
+     "atom_index": 8,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.7344927787780762
+    }
+   ],
+   "chembl_cross_check": {
+    "n_dpph_ic50_records": 4,
+    "records": [
+     {
+      "pIC50": 4.0,
+      "assay": "Antioxidant activity assessed as residual DPPH radical scavenging activity after 45 mins by spectrophotometrically",
+      "document": "CHEMBL1667790"
+     },
+     {
+      "pIC50": 3.6989700043360187,
+      "assay": "Antioxidant activity assessed as DPPH scavenging activity after 30 min by UV-vis spectroscopy",
+      "document": "CHEMBL3044852"
+     },
+     {
+      "pIC50": 1.7340036295049208,
+      "assay": "Antioxidant activity assessed as DPPH radical scavenging activity incubated at room temperature for 20 mins by UV-visible spectrophotometry",
+      "document": "CHEMBL3351737"
+     },
+     {
+      "pIC50": 1.5272435506827877,
+      "assay": "Antioxidant activity assessed as DPPH radical scavenging activity after 30 mins under dark condition",
+      "document": "CHEMBL4190302"
+     }
+    ],
+    "spread_log_units": 2.4727564493172123
+   }
+  },
+  {
+   "rank": 3,
+   "smiles": "COc1cc2ccc(=O)oc2c(O)c1O",
+   "chembl_id": "CHEMBL54909",
+   "doi": "10.1021/acs.jnatprod.7b00665",
+   "experimental_pIC50": 0.72519465815406,
+   "predicted_pIC50": 2.423588050173116,
+   "error": -1.698393392019056,
+   "single_model_prediction": 1.3551957607269287,
+   "leverage": 0.00940580925657975,
+   "inside_leverage_threshold": true,
+   "max_tanimoto_to_training": 0.6363636363636364,
+   "chemical_class": "Catechol",
+   "mol_weight": 208.16899999999998,
+   "n_heavy_atoms": 15,
+   "top_importance_atoms": [
+    {
+     "atom_index": 7,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 1.0
+    },
+    {
+     "atom_index": 10,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.9538599252700806
+    },
+    {
+     "atom_index": 9,
+     "symbol": "O",
+     "aromatic": true,
+     "importance": 0.8897093534469604
+    },
+    {
+     "atom_index": 3,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.8660921454429626
+    },
+    {
+     "atom_index": 8,
+     "symbol": "O",
+     "aromatic": false,
+     "importance": 0.8194449543952942
+    }
+   ],
+   "chembl_cross_check": {
+    "n_dpph_ic50_records": 0,
+    "records": []
+   }
+  },
+  {
+   "rank": 4,
+   "smiles": "C=CCc1cc(NC(=O)C2CC2)ccc1OCC=C(C)CCC=C(C)CCC=C(C)C",
+   "chembl_id": "CHEMBL2087310",
+   "doi": "10.1016/j.bmc.2012.07.025",
+   "experimental_pIC50": 5.05060999335509,
+   "predicted_pIC50": 3.5868808212142955,
+   "error": 1.4637291721407948,
+   "single_model_prediction": 3.221627950668335,
+   "leverage": 0.03660302043372814,
+   "inside_leverage_threshold": true,
+   "max_tanimoto_to_training": 0.9298245614035088,
+   "chemical_class": "Aromatic amine",
+   "mol_weight": 421.6250000000003,
+   "n_heavy_atoms": 31,
+   "top_importance_atoms": [
+    {
+     "atom_index": 4,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 1.0
+    },
+    {
+     "atom_index": 13,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.9868804812431335
+    },
+    {
+     "atom_index": 12,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.9844849109649658
+    },
+    {
+     "atom_index": 5,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.9638732671737671
+    },
+    {
+     "atom_index": 14,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.8540887832641602
+    }
+   ],
+   "chembl_cross_check": {
+    "n_dpph_ic50_records": 1,
+    "records": [
+     {
+      "pIC50": 5.050609993355087,
+      "assay": "Antioxidant activity assessed as inhibition of DPPH radical scavenging activity after 30 mins by spectrophotometry",
+      "document": "CHEMBL2086263"
+     }
+    ]
+   }
+  },
+  {
+   "rank": 5,
+   "smiles": "COc1cc(C2CC(C(=NNc3ccc(C)cc3)C3=NC(=S)NC(c4ccc(O)c(OC)c4)C3)=NC(=S)N2)ccc1O",
+   "chembl_id": "CHEMBL4294673",
+   "doi": "10.1016/j.ejmech.2018.09.009",
+   "experimental_pIC50": 5.94823141718741,
+   "predicted_pIC50": 4.558737844684469,
+   "error": 1.389493572502941,
+   "single_model_prediction": 4.850014686584473,
+   "leverage": 0.01585006319440499,
+   "inside_leverage_threshold": true,
+   "max_tanimoto_to_training": 0.3442622950819672,
+   "chemical_class": "Phenol",
+   "mol_weight": 602.7420000000002,
+   "n_heavy_atoms": 42,
+   "top_importance_atoms": [
+    {
+     "atom_index": 40,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 1.0
+    },
+    {
+     "atom_index": 27,
+     "symbol": "C",
+     "aromatic": true,
+     "importance": 0.9851036667823792
+    },
+    {
+     "atom_index": 41,
+     "symbol": "O",
+     "aromatic": false,
+     "importance": 0.9825523495674133
+    },
+    {
+     "atom_index": 28,
+     "symbol": "O",
+     "aromatic": false,
+     "importance": 0.9695717692375183
+    },
+    {
+     "atom_index": 22,
+     "symbol": "N",
+     "aromatic": false,
+     "importance": 0.8474815487861633
+    }
+   ],
+   "chembl_cross_check": {
+    "n_dpph_ic50_records": 0,
+    "records": []
+   }
+  }
+ ],
+ "all_abs_error_quantiles": {
+  "0.5": 0.16631852500827637,
+  "0.75": 0.37153297069272817,
+  "0.9": 0.6133856135919324,
+  "0.95": 0.8670840856481097,
+  "0.99": 1.4028559804377552
+ }
+}
